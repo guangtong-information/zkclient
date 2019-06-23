@@ -14,6 +14,9 @@ import org.I0Itec.zkclient.ZkClient;
  * （4）临时节点（EPHEMERAL）：和持久节点不同的是，临时节点的生命周期和客户端会话绑定。另外，在临时节点下面不能创建子节点。
  * （5）临时顺序节点（EPHEMERAL_SEQUENTIAL）：此节点是属于临时节点，不过带有顺序，客户端会话结束节点就消失。
  *
+ *  注意：
+ *  （1）临时节点不能创建子节点
+ *  （2）可以使用递归的方式，创建节点
  */
 public class CreateNode {
 
@@ -21,19 +24,19 @@ public class CreateNode {
 
         ZkClient zkClient = new ZkClient("127.0.0.1:2181",5000);
 
-        zkClient.createPersistent("/zk-book-persistent","persistent-node");
+//        zkClient.createPersistent("/zk-book-persistent","persistent-node");
 
-        zkClient.createPersistentSequential("/zk-book-persistent-se","persistent-seq-node");
+//        zkClient.createPersistentSequential("/zk-book-persistent-se","persistent-seq-node");
 
-        zkClient.createEphemeral("/zk-book-ephemeral","ephemeral-node");
+//        zkClient.createEphemeral("/zk-book-ephemeral","ephemeral-node");
 
-        zkClient.createEphemeralSequential("/zk-book-ephemeral-se","ephemeral-seq-node");
-
-        // 自动给节点名添加一个数字后缀，作为新的节点名
-        zkClient.createPersistentSequential("/zk-book-persistent-se","persistent-seq-node");
+//        zkClient.createEphemeralSequential("/zk-book-ephemeral-se","ephemeral-seq-node");
 
         // 自动给节点名添加一个数字后缀，作为新的节点名
-        zkClient.createEphemeralSequential("/zk-book-ephemeral-se","ephemeral-seq-node");
+//        zkClient.createPersistentSequential("/zk-book-persistent-se","persistent-seq-node");
+
+        // 自动给节点名添加一个数字后缀，作为新的节点名
+//        zkClient.createEphemeralSequential("/zk-book-ephemeral-se","ephemeral-seq-node");
 
         // 持久节点可以创建子节点
 //        zkClient.createPersistent("/zk-book-persistent/son","persistent-node-son");
@@ -42,7 +45,7 @@ public class CreateNode {
 //        zkClient.createEphemeral("/zk-book-ephemeral/son","ephemeral-node-son");
 
         // 递归创建节点
-//        zkClient.createPersistent("/parent/son",true);
+        zkClient.createPersistent("/parent/son",true);
 
         try {
             Thread.sleep(Integer.MAX_VALUE);
