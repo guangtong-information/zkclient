@@ -12,7 +12,7 @@ public class DeleteNode {
         ZkClient zkClient = new ZkClient("127.0.0.1:2181", 2000);
 
         // 递归创建节点
-        zkClient.createPersistent("/parent/son",true);
+//        zkClient.createPersistent("/parent/son",true);
 
         // 递归删除所有节点
         zkClient.deleteRecursive("/parent");
